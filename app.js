@@ -1,4 +1,4 @@
-const DEFAULT_MODEL = "gpt-5-mini";
+const DEFAULT_MODEL = "gpt-5.5";
 const API = "https://api.openai.com/v1";
 
 const $ = (id) => document.getElementById(id);

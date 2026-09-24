@@ -14,7 +14,7 @@ The rewrite runs on the OpenAI API with your own key.
 ## Use it
 
 1. Open the site, or open `index.html` locally.
-2. Tap **Settings**, paste your OpenAI API key, pick a model (default `gpt-5-mini`; step up to a bigger model only if output feels thin).
+2. Tap **Settings**, paste your OpenAI API key, pick a model (default `gpt-5.5`: it follows the rewrite rules best and answers in a few seconds; mini models run slower here and pad the prompt).
 3. Pick a mode, type your idea, press **Distill** (or `Ctrl+Enter`), then **Copy**.
 
 On a phone, use your browser's **Add to Home Screen** to open distill like an app. Avoid private/incognito windows: they forget your key when closed.
@@ -26,6 +26,8 @@ Your key is stored only in your browser's localStorage and is sent only to `api.
 ## Customize
 
 The rewrite instructions for each mode live in [`prompts.js`](prompts.js). Edit them to change the output style.
+
+To check a change against real output, save an OpenAI key in `~/.config/distill/openai-key` and run `node tools/try-prompts.js [model]`. It runs a set of sample ideas (tiny, messy, vague, question, large) and writes each prompt to `tools/out/`.
 
 ## Stack
 
