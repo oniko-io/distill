@@ -141,3 +141,15 @@ dialog .row { margin-top: 20px; }
   position: absolute; width: 1px; height: 1px;
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
 }
+
+/* Touch screens: no keyboard shortcut, bigger tap targets. */
+@media (hover: none) and (pointer: coarse) {
+  .hint { visibility: hidden; }
+  button, .modes span { min-height: 44px; }
+  .modes span { display: flex; align-items: center; }
+}
+
+/* iOS Safari zooms into any field under 16px when it gets focus. */
+@media (max-width: 600px) {
+  #output { font-size: 16px; }
+}
