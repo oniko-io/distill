@@ -67,6 +67,7 @@ body {
   flex-wrap: wrap;
 }
 .row.end { justify-content: flex-end; }
+.actions { display: flex; gap: 8px; margin-left: auto; }
 
 h2 { margin: 0; font-size: 1rem; }
 
@@ -144,7 +145,7 @@ dialog .row { margin-top: 20px; }
 
 /* Touch screens: no keyboard shortcut, bigger tap targets. */
 @media (hover: none) and (pointer: coarse) {
-  .hint { visibility: hidden; }
+  .hint { display: none; }
   button, .modes span { min-height: 44px; }
   .modes span { display: flex; align-items: center; }
 }

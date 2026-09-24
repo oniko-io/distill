@@ -2,6 +2,8 @@
 
 Turn a rough idea into an AI-ready prompt.
 
+**Live:** https://oniko-io.github.io/distill/
+
 Type (or dictate) what you want, however messy. distill rewrites it into a clear prompt for:
 
 - **Claude Code**: goal, context, constraints, and "done when" criteria, ready to paste into Claude Code.
@@ -11,11 +13,15 @@ The rewrite runs on the OpenAI API with your own key.
 
 ## Use it
 
-1. Open the site (GitHub Pages) or open `index.html` locally.
-2. Click **Settings**, paste your OpenAI API key, pick a model (default `gpt-5-mini`).
-3. Pick a mode, type your idea, press **Distill** (or `Ctrl+Enter`).
+1. Open the site, or open `index.html` locally.
+2. Tap **Settings**, paste your OpenAI API key, pick a model (default `gpt-5-mini`; step up to a bigger model only if output feels thin).
+3. Pick a mode, type your idea, press **Distill** (or `Ctrl+Enter`), then **Copy**.
 
-Your key is stored only in your browser's localStorage and is sent only to `api.openai.com`. Use a project key with a spending limit.
+On a phone, use your browser's **Add to Home Screen** to open distill like an app. Avoid private/incognito windows: they forget your key when closed.
+
+## Privacy
+
+Your key is stored only in your browser's localStorage and is sent only to `api.openai.com`. Anyone can open the site, but it has no key of its own: each visitor uses and pays for their own. Use a project key with a spending limit. The page asks search engines not to index it.
 
 ## Customize
 
@@ -23,4 +29,4 @@ The rewrite instructions for each mode live in [`prompts.js`](prompts.js). Edit 
 
 ## Stack
 
-Plain HTML, CSS, and JavaScript. No build step, no dependencies.
+Plain HTML, CSS, and JavaScript. No build step, no dependencies. Deployed by GitHub Pages from `main`: every push goes live in about a minute.

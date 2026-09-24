@@ -68,7 +68,7 @@ keyEl.addEventListener("change", () => keyEl.value.trim() && loadModels(keyEl.va
 async function loadModels(key) {
   const note = $("model-note");
   try {
-    const res = await fetch(`${API}/models`, { headers: { Authorization: `Bearer ${key}` } });
+    const res = await request(`${API}/models`, { headers: { Authorization: `Bearer ${key}` } });
     if (!res.ok) throw new Error(await errorMessage(res));
     const { data } = await res.json();
     const skip = /audio|realtime|tts|transcribe|image|search|embedding|moderation|dall-e|whisper|instruct/;
@@ -80,6 +80,15 @@ async function loadModels(key) {
     note.textContent = `${ids.length} models available. Type or pick one.`;
   } catch (err) {
     note.textContent = `Could not load models: ${err.message}`;
+  }
+}
+
+// fetch() only throws on network failure; give that a readable message.
+async function request(url, options) {
+  try {
+    return await fetch(url, options);
+  } catch {
+    throw new Error("Could not reach OpenAI. Check your connection.");
   }
 }
 
@@ -112,7 +121,7 @@ async function distill() {
   goBtn.disabled = true;
   setStatus(`Distilling with ${model}...`);
   try {
-    const res = await fetch(`${API}/chat/completions`, {
+    const res = await request(`${API}/chat/completions`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
       body: JSON.stringify({
@@ -132,6 +141,7 @@ async function distill() {
     $("out-title").textContent = `${mode.label} prompt`;
     $("out-panel").hidden = false;
     setStatus("Done.");
+    ideaEl.blur(); // closes the on-screen keyboard on phones
     outputEl.scrollIntoView({ behavior: "smooth", block: "start" });
   } catch (err) {
     setStatus(err.message, true);
@@ -141,6 +151,12 @@ async function distill() {
 }
 
 goBtn.addEventListener("click", distill);
+$("clear").addEventListener("click", () => {
+  ideaEl.value = "";
+  store.set("distill.draft", "");
+  setStatus("");
+  ideaEl.focus();
+});
 ideaEl.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) distill();
 });
@@ -152,5 +168,9 @@ $("copy").addEventListener("click", async () => {
     outputEl.select();
     document.execCommand("copy");
   }
-  setStatus("Copied to clipboard.");
+  // Feedback on the button itself: on phones the status line is off-screen here.
+  const btn = $("copy");
+  btn.textContent = "Copied";
+  clearTimeout(btn.resetTimer);
+  btn.resetTimer = setTimeout(() => (btn.textContent = "Copy"), 1500);
 });

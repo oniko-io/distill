@@ -6,7 +6,11 @@
   <title>distill</title>
   <meta name="robots" content="noindex, nofollow">
   <meta name="description" content="Turn a rough idea into an AI-ready prompt for Claude Code or any AI chat.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💧</text></svg>">
+  <meta name="theme-color" content="#f6f5f2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141412" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -30,7 +34,10 @@
       <textarea id="idea" rows="9" placeholder="Describe what you want, however messy. e.g. &quot;add dark mode to my app, it should remember the choice and follow the system by default...&quot;"></textarea>
       <div class="row">
         <span class="hint"><kbd>Ctrl</kbd> + <kbd>Enter</kbd> to distill</span>
-        <button id="go" type="button" class="primary">Distill</button>
+        <div class="actions">
+          <button id="clear" type="button" class="ghost">Clear</button>
+          <button id="go" type="button" class="primary">Distill</button>
+        </div>
       </div>
       <p id="status" class="status" role="status" aria-live="polite"></p>
     </section>
