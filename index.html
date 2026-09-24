@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>distill</title>
+  <meta name="description" content="Turn a rough idea into an AI-ready prompt for Claude Code or any AI chat.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💧</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <h1>distill</h1>
+      <p>Rough idea in. AI-ready prompt out.</p>
+    </div>
+    <button id="settings-btn" class="ghost" type="button" aria-haspopup="dialog">Settings</button>
+  </header>
+
+  <main>
+    <section class="panel">
+      <div class="row">
+        <div class="modes" role="radiogroup" aria-label="Output mode">
+          <label><input type="radio" name="mode" value="claude" checked><span>Claude Code</span></label>
+          <label><input type="radio" name="mode" value="general"><span>General AI</span></label>
+        </div>
+      </div>
+      <label for="idea" class="sr-only">Your idea</label>
+      <textarea id="idea" rows="9" placeholder="Describe what you want, however messy. e.g. &quot;add dark mode to my app, it should remember the choice and follow the system by default...&quot;"></textarea>
+      <div class="row">
+        <span class="hint"><kbd>Ctrl</kbd> + <kbd>Enter</kbd> to distill</span>
+        <button id="go" type="button" class="primary">Distill</button>
+      </div>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="panel" id="out-panel" hidden>
+      <div class="row">
+        <h2 id="out-title">Prompt</h2>
+        <button id="copy" type="button" class="ghost">Copy</button>
+      </div>
+      <label for="output" class="sr-only">Generated prompt</label>
+      <textarea id="output" rows="16" spellcheck="false"></textarea>
+    </section>
+  </main>
+
+  <dialog id="settings">
+    <form method="dialog">
+      <h2>Settings</h2>
+      <label for="api-key">OpenAI API key</label>
+      <input id="api-key" type="password" autocomplete="off" placeholder="sk-...">
+      <p class="note">Stored only in this browser (localStorage) and sent only to <code>api.openai.com</code>. Use a project key with a spending limit.</p>
+      <label for="model">Model</label>
+      <input id="model" list="model-list" autocomplete="off" placeholder="gpt-5-mini">
+      <datalist id="model-list"></datalist>
+      <p class="note" id="model-note">Type any model ID. Save a key to load your available models.</p>
+      <div class="row end">
+        <button type="button" id="clear-key" class="ghost danger">Forget key</button>
+        <button value="save" class="primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="prompts.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
