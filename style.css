@@ -107,7 +107,8 @@ button:disabled { opacity: 0.6; cursor: progress; }
   border-radius: 8px;
   overflow: hidden;
 }
-.modes input { position: absolute; opacity: 0; pointer-events: none; }
+.modes label { position: relative; }
+.modes input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; pointer-events: none; }
 .modes span { display: block; padding: 6px 14px; cursor: pointer; color: var(--muted); }
 .modes input:checked + span { background: var(--accent); color: var(--accent-text); }
 .modes input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: -2px; }
